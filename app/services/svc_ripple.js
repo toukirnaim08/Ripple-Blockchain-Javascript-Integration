@@ -245,7 +245,6 @@ function generate_address(key) {
 
   if (privateKey === null) {
     // Hash the newly generated privateKey and use that as mnemonic to
-    // make Quanta compatible with it's shards's fixed specification
     privateKey = createHash('sha256')
       .update(xrpl.Wallet.generate().privateKey)
       .digest('hex')
