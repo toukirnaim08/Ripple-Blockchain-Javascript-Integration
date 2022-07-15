@@ -6,7 +6,7 @@ module.exports = {
      * /ripple-integration/estimate-ripple-fee:
      *   get:
      *     summary: Retrieves the network fee of the desired ripple network.
-     *     description: Retrieves a network fee, can be used to ping for aliveness. Use mainnet as input for the mainnet
+     *     description: Retrieves a network fee, can be used to ping for aliveness.
      *     responses:
      *       200:
      *         description: A list of users.

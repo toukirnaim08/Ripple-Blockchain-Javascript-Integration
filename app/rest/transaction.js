@@ -5,8 +5,8 @@ module.exports = {
      * @swagger
      * /ripple-integration/transfer:
      *   post:
-     *     summary: Sends a transaction on the selected network, blocking call and is only returns once the transaction has finalised.
-     *     description: Fires of a query from unido_transanction_service which performs a transfer
+     *     summary: Sends a transaction on the selected network.
+     *     description: performs a transfer
      *     requestBody:
      *       required: true
      *       content:

@@ -6,7 +6,7 @@ module.exports = {
      * /ripple-integration/publish:
      *   post:
      *     summary: Publishes a transaction of the given query, non blocking returns immediately with the hash of the sent query
-     *     description: Fires of a query from unido_transanction_service which performs a transfer, and immediately returns with hash
+     *     description: Performs a transfer, and immediately returns with hash
      *     requestBody:
      *       required: true
      *       content:

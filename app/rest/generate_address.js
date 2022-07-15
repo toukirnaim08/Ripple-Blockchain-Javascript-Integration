@@ -6,7 +6,7 @@ module.exports = {
      * /ripple-integration/generate-address:
      *   post:
      *     summary: Generate/Re-Generate ripple address.
-     *     description: Generate or re-create ripple address from private key if provided
+     *     description: Generate or re-create ripple address from private key
      *     requestBody:
      *       required: false
      *       content:
