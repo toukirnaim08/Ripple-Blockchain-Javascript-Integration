@@ -3,4 +3,5 @@ bitbucket-pipelines.yml
 jest.config.jest
 external_server.test.js
 internal_server.test.js
+tests
 .env
