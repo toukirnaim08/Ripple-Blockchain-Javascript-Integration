@@ -7,7 +7,7 @@ The server is hosted on localhost 5130
 ```bash
 # Run the tests before pushing to git
 npm run bbrun
-# this command runs test on ripple_service and the mocked internal_server
+# this command runs test on svc_ripple and the mocked internal_server
 
 ```
 ## Steps to run external and internal tests

@@ -1,15 +1,15 @@
 {
-    "version": "1.1.0",
-    "name": "unido-ripple-tx-service",
+    "version": "1.0.0",
+    "name": "ripple-integration",
     "dependencies": {
         "axios": "^0.24.0",
         "bignumber.js": "^9.0.2",
         "bunyan": "^1.8.15",
         "cors": "^2.8.5",
-        "dd-trace": "^2.2.0",
         "dotenv": "^10.0.0",
         "express": "^4.17.3",
         "forever": "^4.0.3",
+        "node-fetch": "^3.2.8",
         "nodemon": "^2.0.15",
         "socket.io": "^4.4.1",
         "socket.io-client": "^4.4.1",
@@ -26,7 +26,7 @@
     },
     "scripts": {
         "test": "jest",
-        "start": "nodemon server.js",
+        "start": "node server.js",
         "docker": "forever server.js"
     }
 }

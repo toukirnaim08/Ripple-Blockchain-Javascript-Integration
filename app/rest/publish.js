@@ -1,4 +1,4 @@
-const { publish_transaction} = require('../services/ripple_service');
+const { publish_transaction} = require('../services/svc_ripple');
 
 module.exports = {
     /**
@@ -20,19 +20,6 @@ module.exports = {
      *                      type: string
      *                      description: User Secrete Entropy
      *                      example: "40894230741611627681334940161831938974457257059691575147256097143736863012824"
-     *                  server: 
-     *                      type: string
-     *                      description: specifies server
-     *                      example: mainnet
-     *     parameters:
-     *       - in: path
-     *         name: network
-     *         description: Selects the nework to use, defaults to testnet
-     *         schema:
-     *           type: string
-     *           enum: ["mainnet","testnet"]
-     *           default: mainnet
-     *           required: true
      *     responses:
      *       200:
      *         description: A list of users.
@@ -59,19 +46,16 @@ module.exports = {
                 status: 200,
                 tx_hash: result
             }
-            log.info(returnData, 'Transaction Published successfully returning response')
+            console.log(returnData, 'Transaction Published successfully returning response')
             res.send(returnData);
         }
         catch (e) {
-            log.info(e, 'Transaction error')
-            log.info(query, 'Transaction query')
-            {
-                let returnData = {
-                    status: 400,
-                    message: "User Input Error"
-                }
-                res.send(returnData);
+            console.log(e, 'Transaction error')
+            let returnData = {
+                status: 400,
+                message: "User Input Error"
             }
+            res.send(returnData);
         }
     }
 };

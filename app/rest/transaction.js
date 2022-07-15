@@ -1,4 +1,4 @@
-const { send_token} = require('../services/ripple_service');
+const { send_token} = require('../services/svc_ripple');
 
 module.exports = {
     /**
@@ -20,10 +20,6 @@ module.exports = {
      *                      type: string
      *                      description: User Secrete Entropy
      *                      example: "40894230741611627681334940161831938974457257059691575147256097143736863012824"
-     *                  server: 
-     *                      type: string
-     *                      description: specifies server
-     *                      example: mainnet
      *     responses:
      *       200:
      *         description: A list of users.
@@ -42,8 +38,9 @@ module.exports = {
      *                         example: 5FC948BB65BF13E7DCA445E17EA6F7E7168352A9E92F6E53F996FAADF6AC8A0C
      */
     transfer: async function (app, req, res) {
-        data.server = process.env.MAINNET;
-        let result = await send_token(data.server, data.query, data.secret);
+        let data = req.body;
+        server = process.env.MAINNET;
+        let result = await send_token(server, data.query, data.secret);
         if (result) {
             let returnData = {
                 status: 200,

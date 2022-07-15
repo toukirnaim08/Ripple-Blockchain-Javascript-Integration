@@ -1,4 +1,4 @@
-const { generate_address} = require('../services/ripple_service');
+const { generate_address} = require('../services/svc_ripple');
 
 module.exports = {
     /**
@@ -28,8 +28,9 @@ module.exports = {
      */
     genearteAddress: async function (app, req, res) {
         try {
+            // console.log('hittet');
             const result = generate_address(req.body.key);
-
+            
             res.send({
                 status: 0,
                 message: null,

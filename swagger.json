@@ -1,0 +1,13 @@
+{
+    "definition": {
+      "openapi": "3.0.0",
+      "info": {
+        "title": "Ripple Integration",
+        "version": "1.0.0",
+        "description": "Ripple Integration using xrpl library"
+      }
+    },
+    "apis": [
+      "./app/rest/*.js"
+    ]
+  }

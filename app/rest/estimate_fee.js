@@ -1,4 +1,4 @@
-const { get_estimated_ripple_fee} = require('../services/ripple_service');
+const { get_estimated_ripple_fee} = require('../services/svc_ripple');
 
 module.exports = {
     /**

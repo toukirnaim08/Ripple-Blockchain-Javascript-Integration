@@ -4,6 +4,7 @@ const xrpl = require('xrpl');
 const { default: ECDSA } = require('xrpl/dist/npm/ECDSA');
 const { createHash } = require("crypto");
 const { default: BigNumber } = require('bignumber.js');
+const { transactionMockHandler } = require('../mock/transaction')
 
 const log = require('bunyan').createLogger({ name: 'ripple_methods' })
 delete log.fields.hostname;
@@ -12,27 +13,6 @@ const estimate_fee_query = {
   "id": "EstimateFee",
   "command": "fee"
 };
-
-/**
- * returns a object with all the information relating to that wallet
- * 
- * @param {Client} client 
- * @param {string} walletID 
- * 
- * @returns {object}
- */
-async function get_account_info(client, walletID) {
-  let response = await client.request({
-    "id": 2,
-    "command": "account_info",
-    "account": walletID,
-    "strict": true,
-    "ledger_index": "current",
-    "queue": true
-  })
-
-  return response;
-}
 
 /**
  * given a string, returns an object connected to the ripple webhooks
@@ -155,6 +135,12 @@ function is_query_validator(query) {
  */
 async function send_token(server, query, walletFromSeed) {
 
+  if(process.env.NODE_ENV =='test')
+  {
+    result_hash = await transactionMockHandler(query);
+    return result_hash;
+  }
+  console.log('next   ')
   let client = await get_connection(server);
   let wallet = {};
 
@@ -167,7 +153,7 @@ async function send_token(server, query, walletFromSeed) {
   query.Amount = query.Amount.toString();
   query.Fee = query.Fee.toString();
 
-  // generate the wallet from either the secret seed for testing or entropy from UNIDO
+  // generate the wallet from either the secret seed for testing
   if (walletFromSeed.length == 29) {
     wallet = xrpl.Wallet.fromSeed(walletFromSeed);
   }
@@ -211,7 +197,7 @@ async function publish_transaction(server, query, walletFromSeed) {
   query.Amount = query.Amount.toString();
   query.Fee = query.Fee.toString();
 
-  // generate the wallet from either the secret seed for testing or entropy from UNIDO
+  // generate the wallet from either the secret seed for testing
   if (walletFromSeed.length == 29) {
     wallet = xrpl.Wallet.fromSeed(walletFromSeed);
   }
@@ -238,27 +224,6 @@ async function publish_transaction(server, query, walletFromSeed) {
   } catch (e) {
     throw new Error('Something went wrong when sigining the transaction')
   }
-}
-
-/**
- * 
- * @param {string} server
- * @param {string} hash
- * 
- * @return {object}
- */
-async function check_hash_status(server, hash) {
-  let client = await get_connection(server);
-  let query = {
-    "id": 1,
-    "command": "tx",
-    "transaction": hash,
-    "binary": false
-  }
-  let status = await client.request(query);
-
-  log.info(status, `Returning status of ${hash}`);
-  return status;
 }
 
 /**
@@ -302,9 +267,7 @@ module.exports = {
   request_fee,
   get_connection,
   terminate_connection,
-  get_account_info,
   send_token,
-  check_hash_status,
   is_query_validator,
   generate_address
 }
